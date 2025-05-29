@@ -9,35 +9,36 @@ const https = axios.create({
     'Content-Type': 'application/json'
   },
 });
-
-// Interceptor đơn giản cho request
+// Thêm interceptor để xử lý lỗi toàn cục
 https.interceptors.request.use(
   (config) => {
-    // Lấy token từ localStorage nếu có
-    const token = localStorage.getItem('userToken');
-    if (token && config.headers) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+    // Có thể thêm logic trước khi gửi request
     return config;
-  },
-  (error) => {
+  }
+  , (error) => {
+    // Xử lý lỗi request
     return Promise.reject(error);
   }
 );
 
-// Interceptor đơn giản cho response
 https.interceptors.response.use(
   (response) => {
+    // Có thể thêm logic xử lý response
     return response;
   },
   (error) => {
-    // Xử lý lỗi đơn giản
-    if (error.response?.status === 401) {
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userData');
+    // Xử lý lỗi response
+    if (error.response) {
+      // Lỗi từ server
+      console.error("Server Error:", error.response.data);
+    } else if (error.request) {
+      // Không nhận được phản hồi từ server
+      console.error("Network Error:", error.request);
+    } else {
+      // Lỗi khác
+      console.error("Error:", error.message);
     }
     return Promise.reject(error);
   }
 );
-
 export default https;
