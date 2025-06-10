@@ -1,6 +1,10 @@
 import SocialLogin from "./SocialLogin";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  switchToRegister: () => void;
+}
+
+const LoginForm = ({ switchToRegister }: LoginFormProps) => {
   return (
     <div className="p-4 md:p-5">
       <form className="space-y-4" action="#">
@@ -26,7 +30,7 @@ const LoginForm = () => {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Password
+            Mật khẩu
           </label>
           <input
             type="password"
@@ -52,11 +56,15 @@ const LoginForm = () => {
 
         <SocialLogin />
 
-        <div className="text-sm font-medium text-gray-500">
-          Not registered?{" "}
-          <a href="#" className="text-blue-700 hover:underline">
-            Create account
-          </a>
+        <div className="text-sm font-medium text-gray-500 text-center">
+          Chưa có tài khoản?{" "}
+          <button
+            type="button"
+            onClick={switchToRegister}
+            className="text-blue-700 hover:underline font-medium ml-1"
+          >
+            Đăng ký ngay
+          </button>
         </div>
       </form>
     </div>
