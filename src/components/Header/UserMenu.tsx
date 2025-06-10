@@ -2,12 +2,14 @@ interface UserMenuProps {
   isUserMenuOpen: boolean;
   toggleUserMenu: () => void;
   openLoginModal: () => void;
+  openRegisterModal: () => void;
 }
 
 const UserMenu = ({
   isUserMenuOpen,
   toggleUserMenu,
   openLoginModal,
+  openRegisterModal,
 }: UserMenuProps) => {
   return (
     <div className="relative">
@@ -47,6 +49,7 @@ const UserMenu = ({
             <button
               className="cursor-pointer w-32 px-6 py-2 rounded-sm text-center text-sm text-gray-700 hover:bg-gray-100"
               type="button"
+              onClick={openRegisterModal}
             >
               Đăng Ký
             </button>

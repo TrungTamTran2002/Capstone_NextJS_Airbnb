@@ -3,6 +3,7 @@ import { useState } from "react";
 import LoginModal from "../Auth/LoginModal";
 import NavLinks from "./NavLinks";
 import UserMenu from "./UserMenu";
+import RegisterModal from "../Auth/RegisterModal";
 
 const Header = () => {
   // thay đổi trạng thái cho dropdown user menu, mobile menu và login modal
@@ -10,6 +11,7 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModal, setIsRegisterModalOpen] = useState(false);
 
   // fcs để hiện dropdown user menu, mobile menu và login modal
   const toggleUserMenu = () => {
@@ -32,6 +34,28 @@ const Header = () => {
     setIsLoginModalOpen(false);
   };
 
+  // fcs mở register modal
+  const openRegisterModal = () => {
+    setIsRegisterModalOpen(true);
+    setIsUserMenuOpen(true); // Đóng dropdown user menu
+  };
+
+  // fcs đóng register modal
+  const closeRegisterModal = () => {
+    setIsRegisterModalOpen(false);
+  };
+
+  // fcs switch chuyển đăng ký sang đăng nhập
+  const switchToLogin = () => {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(true);
+  };
+
+  // fcs switch chuyển đăng nhập sang đăng ký
+  const switchToRegister = () => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(true);
+  };
   return (
     <>
       <nav className="bg-white border-gray-200">
@@ -55,6 +79,7 @@ const Header = () => {
               toggleUserMenu={toggleUserMenu}
               isUserMenuOpen={isUserMenuOpen}
               openLoginModal={openLoginModal}
+              openRegisterModal={openRegisterModal}
             />
             <button
               type="button"
@@ -87,7 +112,18 @@ const Header = () => {
       </nav>
 
       {/* Login Modal  */}
-      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={closeLoginModal}
+        switchToRegister={switchToRegister}
+      />
+
+      {/* Register Modal */}
+      <RegisterModal
+        isOpen={isRegisterModal}
+        onClose={closeRegisterModal}
+        switchToLogin={switchToLogin}
+      />
     </>
   );
 };
