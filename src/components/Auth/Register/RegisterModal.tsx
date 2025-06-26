@@ -71,7 +71,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-brightness-95 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden  ">
+    <div className="fixed inset-0 backdrop-brightness-95 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden" onClick={onClose}>
       <div
         className="relative p-4 w-full max-w-md max-h-full animate-fadeIn"
         onClick={(e) => e.stopPropagation()}

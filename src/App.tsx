@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
 
 // Component Layout chứa Header
 interface WithHeaderProps {
@@ -20,6 +21,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer position="top-right" autoClose={1500} />
         <Routes>
           <Route
             path="/"

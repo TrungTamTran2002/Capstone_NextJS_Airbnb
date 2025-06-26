@@ -3,6 +3,7 @@ interface UserMenuProps {
   toggleUserMenu: () => void;
   openLoginModal: () => void;
   openRegisterModal: () => void;
+  closeUserMenu: () => void;
 }
 
 const UserMenu = ({
@@ -10,7 +11,15 @@ const UserMenu = ({
   toggleUserMenu,
   openLoginModal,
   openRegisterModal,
+  closeUserMenu,
 }: UserMenuProps) => {
+  // Sử dụng closeUserMenu để đóng menu khi cần
+  const handleCloseMenu = () => {
+    if (closeUserMenu) {
+      closeUserMenu();
+    }
+  };
+
   return (
     <div className="relative">
       <button
@@ -33,6 +42,10 @@ const UserMenu = ({
           isUserMenuOpen ? "block" : "hidden"
         } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44`}
         id="user-dropdown"
+        onClick={(e) => {
+          e.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+          handleCloseMenu(); // Gọi hàm đóng menu
+        }}
       >
         <ul className="py-2" aria-labelledby="user-menu-button">
           <li className="flex justify-center">

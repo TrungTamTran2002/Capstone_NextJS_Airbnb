@@ -3,6 +3,7 @@ import https from "./apiConfig";
 
 // Login service với types từ file types
 export const loginService = (loginData: LoginRequest) => {
+  console.log("Login Data:", loginData);
   return https.post("auth/signin", loginData);
 };
 

@@ -1,18 +1,17 @@
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import store from "./redux/store/store";
+import App from "./App";
+import { loadUserFromStorage } from "./redux/store/slices/userSlice";
 
-export const store = configureStore({
-  reducer: {
-    // Thêm các reducer của bạn vào đây
-    // Ví dụ: user: userReducer,
-  },
-});
+// Load user data from localStorage when the app starts
+store.dispatch(loadUserFromStorage());
 
-createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
 );

@@ -25,7 +25,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
         <li>
           <Link
             to="/about"
-            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-300 hover:after:w-full"
+            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
             About
           </Link>
@@ -33,7 +33,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
         <li>
           <Link
             to="/services"
-            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-300 hover:after:w-full"
+            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
             Services
           </Link>
@@ -41,7 +41,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
         <li>
           <Link
             to="/pricing"
-            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-300 hover:after:w-full"
+            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
             Pricing
           </Link>
@@ -49,7 +49,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
         <li>
           <Link
             to="contact"
-            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-300 hover:after:w-full"
+            className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
             Contact
           </Link>
