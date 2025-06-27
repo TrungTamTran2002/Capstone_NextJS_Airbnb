@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import RegisterForm from "./RegisterForm";
+import { registerService } from "../../../services/authService";
+import { toast } from "react-toastify";
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -11,61 +14,67 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
   onClose,
   switchToLogin,
 }) => {
-  // State để lưu thông tin form
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
     phone: "",
     birthday: "",
-    gender: true, // true: Nam, false: Nữ
+    gender: "true", // "true": Nam, "false": Nữ
   });
 
-  // Xử lý thay đổi input
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-
-    // Xử lý đặc biệt cho checkbox
-    if (type === "checkbox" && name === "gender") {
-      setFormData({
-        ...formData,
-        [name]: (e.target as HTMLInputElement).checked,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  // Xử lý submit form
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Kiểm tra mật khẩu khớp nhau
-    if (formData.password !== formData.confirmPassword) {
-      alert("Mật khẩu và xác nhận mật khẩu không khớp!");
-      return;
-    }
-
-    // Dữ liệu gửi lên API (không bao gồm id và role vì server sẽ tự xử lý)
     const userData = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
       phone: formData.phone,
       birthday: formData.birthday,
-      gender: formData.gender,
-      // id và role sẽ được xử lý bởi backend
+      gender: formData.gender === "true", // Chuyển đổi thành boolean
     };
 
-    console.log("Dữ liệu đăng ký:", userData);
-    // TODO: Gửi dữ liệu lên API
-    // apiRegister(userData).then(...)
+    /* 
+    try {
+      const response = await registerService(userData);
+      console.log("Đăng ký thành công:", response.data);
+      alert("Đăng ký thành công!");
+      switchToLogin(); // Chuyển sang form đăng nhập sau khi đăng ký thành công
+    } catch (error) {
+      console.error("Lỗi khi đăng ký:", error);
+      alert("Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại.");
+    }*/
+
+    registerService(userData)
+      .then((response) => {
+        console.log("Đăng ký thành công:", response.data);
+        toast.success("Đăng ký thành công!");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          phone: "",
+          birthday: "",
+          gender: "true", // Reset về giá trị mặc định
+        });
+        onClose(); // Đóng modal sau khi đăng ký thành công
+        switchToLogin(); // Chuyển sang form đăng nhập sau khi đăng ký thành công
+      })
+      .catch((error) => {
+        console.error("Lỗi khi đăng ký:", error);
+        toast.error("Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại.");
+      });
   };
 
   if (!isOpen) return null;
@@ -79,9 +88,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
         className="relative p-4 w-full max-w-md max-h-full animate-fadeIn"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal content */}
         <div className="relative bg-white rounded-lg shadow-lg">
-          {/* Modal header */}
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
             <h3 className="text-xl font-semibold text-gray-900">
               Đăng ký tài khoản
@@ -110,186 +117,17 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
             </button>
           </div>
 
-          {/* Modal body */}
           <div className="p-4 md:p-5 max-h-[70vh] overflow-y-auto">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              {/* Họ tên */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Họ tên <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="Nguyễn Văn A"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="name@company.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              {/* Mật khẩu */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Mật khẩu <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  minLength={6}
-                />
-              </div>
-
-              {/* Xác nhận mật khẩu */}
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Xác nhận mật khẩu <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              {/* Số điện thoại */}
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Số điện thoại <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  placeholder="0123456789"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  pattern="[0-9]{10}"
-                  required
-                />
-              </div>
-
-              {/* Ngày sinh và Giới tính */}
-              <div className="flex space-x-4">
-                {/* Ngày sinh */}
-                <div className="flex-1">
-                  <label
-                    htmlFor="birthday"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Ngày sinh
-                  </label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    value={formData.birthday}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Giới tính */}
-                <div className="flex-1">
-                  <label
-                    htmlFor="gender"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Giới tính
-                  </label>
-                  <select
-                    name="gender"
-                    id="gender"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    value={formData.gender ? "true" : "false"}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        gender: e.target.value === "true",
-                      })
-                    }
-                  >
-                    <option value="true">Nam</option>
-                    <option value="false">Nữ</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Nút đăng ký */}
-              <button
-                type="submit"
-                className="w-full text-white bg-[#FE6B6E] hover:bg-rose-600 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-300"
-              >
-                Đăng ký
-              </button>
-
-              <div className="flex items-center">
-                <div className="w-full h-0.5 bg-gray-200"></div>
-                <div className="px-5 text-center text-gray-500">hoặc</div>
-                <div className="w-full h-0.5 bg-gray-200"></div>
-              </div>
-
-              {/* Link to login */}
-              <div className="text-sm font-medium text-gray-500">
-                Đã có tài khoản?{" "}
-                <button
-                  className="cursor-pointer text-blue-700 hover:underline font-medium ml-1"
-                  type="button"
-                  onClick={() => {
-                    onClose();
-                    switchToLogin();
-                  }}
-                >
-                  Đăng nhập
-                </button>
-              </div>
-            </form>
+            <RegisterForm
+              formData={formData}
+              setFormData={setFormData}
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              switchToLogin={() => {
+                onClose();
+                switchToLogin();
+              }}
+            />
           </div>
         </div>
       </div>
