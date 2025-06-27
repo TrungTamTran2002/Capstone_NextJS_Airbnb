@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store/store"; // Import Redux Store
 import { useState, useEffect, useRef } from "react";
 import LoginModal from "../Auth/Login/LoginModal";
 import NavLinks from "./NavLinks";
 import UserMenu from "./UserMenu";
 import RegisterModal from "../Auth/Register/RegisterModal";
+import { logout } from "../../redux/store/slices/userSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
   // thay đổi trạng thái cho dropdown user menu, mobile menu và login modal
@@ -17,6 +20,7 @@ const Header = () => {
 
   // Lấy thông tin người dùng từ Redux Store
   const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   // fcs để hiện dropdown user menu, mobile menu và login modal
   const toggleUserMenu = () => {
@@ -80,6 +84,13 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleSignOut = () => {
+    dispatch(logout()); // Gọi action logout để xóa thông tin người dùng
+    setIsUserMenuOpen(false); // Đặt lại trạng thái menu về false để khi đăng xuất thì menu sẽ đóng
+    setIsMobileMenuOpen(false); // Đóng mobile menu nếu đang mở
+    toast.success("Bạn đã đăng xuất thành công!"); // Hiển thị thông báo toast
+  };
 
   return (
     <>
@@ -147,7 +158,10 @@ const Header = () => {
                       <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Earnings
                       </li>
-                      <li className="px-4 py-2 text-red-600 hover:bg-gray-100 cursor-pointer">
+                      <li
+                        className="px-4 py-2 text-red-600 hover:bg-gray-100 cursor-pointer"
+                        onClick={handleSignOut} // Thêm sự kiện đăng xuất
+                      >
                         Sign out
                       </li>
                     </ul>

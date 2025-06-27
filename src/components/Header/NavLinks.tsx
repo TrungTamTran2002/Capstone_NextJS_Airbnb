@@ -19,7 +19,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
             className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-[#FE6B6E] md:p-0"
             aria-current="page"
           >
-            Home
+            Trang chủ
           </Link>
         </li>
         <li>
@@ -27,7 +27,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
             to="/about"
             className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
-            About
+            Giới thiệu
           </Link>
         </li>
         <li>
@@ -35,7 +35,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
             to="/services"
             className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
-            Services
+            Dịch vụ
           </Link>
         </li>
         <li>
@@ -43,7 +43,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
             to="/pricing"
             className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
-            Pricing
+            Chi phí
           </Link>
         </li>
         <li>
@@ -51,7 +51,7 @@ const NavLinks = ({ isMobileMenuOpen }: NavLinkProps) => {
             to="contact"
             className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent  md:p-0 md:hover:text-[#FE6B6E] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full"
           >
-            Contact
+            Liên hệ
           </Link>
         </li>
       </ul>
