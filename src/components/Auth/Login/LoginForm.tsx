@@ -8,6 +8,7 @@ interface LoginFormProps {
   onSubmit: (e: React.FormEvent) => void;
   switchToRegister: () => void;
   error?: string; // Nhận thêm prop error
+  onClose: () => void; // Hàm để đóng modal nếu cần
 }
 
 const LoginForm = ({
@@ -18,7 +19,14 @@ const LoginForm = ({
   onSubmit,
   switchToRegister,
   error,
+  onClose, // Nhận prop onClose
 }: LoginFormProps) => {
+  // Hàm xử lý chuyển sang form đăng ký
+  const handleSwitchToRegister = () => {
+    onClose(); // Đóng modal đăng nhập
+    switchToRegister(); // Mở modal đăng ký
+  };
+
   return (
     <div className="p-4 md:p-5">
       <form className="space-y-4" onSubmit={onSubmit}>
@@ -88,7 +96,7 @@ const LoginForm = ({
           Chưa có tài khoản?{" "}
           <button
             type="button"
-            onClick={switchToRegister}
+            onClick={handleSwitchToRegister} // Gọi hàm chuyển đổi khi nhấn
             className="text-blue-700 hover:underline font-medium ml-1"
           >
             Đăng ký ngay

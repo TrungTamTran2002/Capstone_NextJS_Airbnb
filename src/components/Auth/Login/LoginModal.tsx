@@ -97,6 +97,7 @@ const LoginModal = ({ isOpen, onClose, switchToRegister }: LoginModalProps) => {
             onSubmit={handleLogin}
             switchToRegister={switchToRegister}
             error={error} // Truyền thêm error vào LoginForm
+            onClose={onClose} // Truyền hàm onClose để đóng modal sau khi chuyển to register
           />
         </div>
       </div>
