@@ -71,7 +71,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-brightness-95 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden" onClick={onClose}>
+    <div
+      className="fixed inset-0 backdrop-brightness-95 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden"
+      onClick={onClose}
+    >
       <div
         className="relative p-4 w-full max-w-md max-h-full animate-fadeIn"
         onClick={(e) => e.stopPropagation()}
@@ -212,68 +215,49 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
                 />
               </div>
 
-              {/* Ngày sinh */}
-              <div>
-                <label
-                  htmlFor="birthday"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Ngày sinh
-                </label>
-                <input
-                  type="date"
-                  name="birthday"
-                  id="birthday"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  value={formData.birthday}
-                  onChange={handleChange}
-                />
-              </div>
+              {/* Ngày sinh và Giới tính */}
+              <div className="flex space-x-4">
+                {/* Ngày sinh */}
+                <div className="flex-1">
+                  <label
+                    htmlFor="birthday"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Ngày sinh
+                  </label>
+                  <input
+                    type="date"
+                    name="birthday"
+                    id="birthday"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    value={formData.birthday}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              {/* Giới tính */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900">
-                  Giới tính
-                </label>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      name="gender"
-                      id="gender-male"
-                      value="true"
-                      checked={formData.gender === true}
-                      onChange={() =>
-                        setFormData({ ...formData, gender: true })
-                      }
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                    />
-                    <label
-                      htmlFor="gender-male"
-                      className="ml-2 text-sm font-medium text-gray-900"
-                    >
-                      Nam
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      name="gender"
-                      id="gender-female"
-                      value="false"
-                      checked={formData.gender === false}
-                      onChange={() =>
-                        setFormData({ ...formData, gender: false })
-                      }
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                    />
-                    <label
-                      htmlFor="gender-female"
-                      className="ml-2 text-sm font-medium text-gray-900"
-                    >
-                      Nữ
-                    </label>
-                  </div>
+                {/* Giới tính */}
+                <div className="flex-1">
+                  <label
+                    htmlFor="gender"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Giới tính
+                  </label>
+                  <select
+                    name="gender"
+                    id="gender"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    value={formData.gender ? "true" : "false"}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        gender: e.target.value === "true",
+                      })
+                    }
+                  >
+                    <option value="true">Nam</option>
+                    <option value="false">Nữ</option>
+                  </select>
                 </div>
               </div>
 
@@ -297,7 +281,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
                 <button
                   className="cursor-pointer text-blue-700 hover:underline font-medium ml-1"
                   type="button"
-                  onClick={switchToLogin}
+                  onClick={() => {
+                    onClose();
+                    switchToLogin();
+                  }}
                 >
                   Đăng nhập
                 </button>
