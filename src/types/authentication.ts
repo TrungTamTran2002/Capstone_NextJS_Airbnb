@@ -4,14 +4,12 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
-  id: number;
   name: string;
   email: string;
   password: string;
   phone: string;
   birthday: string;
   gender: boolean;
-  role: string;
 }
 
 export interface AuthResponse {

@@ -1,3 +1,9 @@
+import BookingSearchBar from "../../components/BookingSearchBar/BookingSearchBar";
+
 export default function HomePage() {
-  return <div></div>;
+  return (
+    <div className="flex justify-center">
+      <BookingSearchBar />
+    </div>
+  );
 }

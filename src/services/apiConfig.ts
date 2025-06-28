@@ -9,6 +9,7 @@ const https = axios.create({
     TokenCybersoft: TOKEN_CYBERSOFT,
   },
 });
+
 // Thêm interceptor để xử lý lỗi toàn cục
 https.interceptors.request.use(
   (config) => {
@@ -17,6 +18,7 @@ https.interceptors.request.use(
   },
   (error) => {
     // Xử lý lỗi request
+    console.error("Request Error:", error);
     return Promise.reject(error);
   }
 );
@@ -27,10 +29,10 @@ https.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log("Api lỗi");
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
+    console.error("API Error:", error.response); // Log chi tiết lỗi từ API
+    console.log("Api lỗi"); // Log thông báo lỗi chung
     return Promise.reject(error);
   }
 );
+
 export default https;
