@@ -52,7 +52,7 @@ const LoginModal = ({ isOpen, onClose, switchToRegister }: LoginModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-brightness-95"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-brightness-110"
       onClick={onClose}
     >
       <div
