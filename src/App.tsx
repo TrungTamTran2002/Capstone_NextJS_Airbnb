@@ -11,32 +11,43 @@ interface WithHeaderProps {
 }
 
 const WithHeader = ({ children }: WithHeaderProps) => (
-  <div className="">
+  <div>
     <Header />
-    <div className="">{children}</div>
+    {children}
   </div>
 );
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <ToastContainer position="top-right" autoClose={1500} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <WithHeader>
-                <HomePage />
-              </WithHeader>
-            }
-          />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="/contact" element={<div>Contact Page</div>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={1500} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <WithHeader>
+              <HomePage />
+            </WithHeader>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <WithHeader>
+              <div>About Page</div>
+            </WithHeader>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <WithHeader>
+              <div>Contact Page</div>
+            </WithHeader>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
