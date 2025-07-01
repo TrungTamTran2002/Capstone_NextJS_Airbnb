@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer/Footer";
 
 // Component Layout chứa Header
 interface WithHeaderProps {
@@ -14,6 +15,7 @@ const WithHeader = ({ children }: WithHeaderProps) => (
   <div>
     <Header />
     {children}
+    <Footer />
   </div>
 );
 
