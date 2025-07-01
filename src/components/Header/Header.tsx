@@ -9,7 +9,7 @@ import RegisterModal from "../Auth/Register/RegisterModal";
 import { logout } from "../../redux/store/slices/userSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BackTop } from "antd";
+import { FloatButton } from "antd"; // Replace BackTop import
 
 const Header = () => {
   // thay đổi trạng thái cho dropdown user menu, mobile menu và login modal
@@ -19,6 +19,7 @@ const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [showBackTop, setShowBackTop] = useState(false); // Trạng thái cho BackTop button
+  const [isScrolled, setIsScrolled] = useState(false); // Trạng thái cho việc cuộn trang
 
   // Lấy thông tin người dùng từ Redux Store
   const user = useSelector((state: RootState) => state.user);
@@ -92,6 +93,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setShowBackTop(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 0); // Thay đổi trạng thái isScrolled khi cuộn
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -110,7 +112,12 @@ const Header = () => {
 
   return (
     <>
-      <nav className="bg-white border-gray-200">
+      {/* bg-transparent z-[990] py-5 fixed w-full nav-menu text-white duration-500 smm:bg-black  lg:bg-transparent  */}
+      <nav
+        className={`${
+          isScrolled ? "bg-white text-black" : "bg-transparent text-white"
+        } border-none z-[990] fixed w-full nav-menu duration-500`}
+      >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"
@@ -131,7 +138,11 @@ const Header = () => {
               <div className="relative" ref={userMenuRef}>
                 <button
                   type="button"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-900 font-medium group border border-white hover:text-[#FE6B6E] hover:border-[#FE6B6E] transition duration-300 cursor-pointer"
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-900 font-medium group border transition duration-300 cursor-pointer ${
+                    isScrolled
+                      ? "border-gray-300 hover:border-[#FE6B6E]"
+                      : "border-white hover:border-[#FE6B6E]"
+                  }`}
                   onClick={toggleUserMenu}
                 >
                   <svg
@@ -148,7 +159,11 @@ const Header = () => {
                       d="M12 4.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 11.25c-4.97 0-9 2.25-9 5.25v1.5h18v-1.5c0-3-4.03-5.25-9-5.25z"
                     />
                   </svg>
-                  <span className="group-hover:text-[#FE6B6E] transition duration-300">
+                  <span
+                    className={` group-hover:text-[#FE6B6E] font-bold transition duration-300 ${
+                      isScrolled ? "text-black  " : "text-white"
+                    }`}
+                  >
                     {user.name}
                   </span>
                 </button>
@@ -217,7 +232,10 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          <NavLinks isMobileMenuOpen={isMobileMenuOpen} />
+          <NavLinks
+            isMobileMenuOpen={isMobileMenuOpen}
+            isScrolled={isScrolled}
+          />
         </div>
       </nav>
 
@@ -237,7 +255,7 @@ const Header = () => {
 
       {/* BackTop Button */}
       {showBackTop && (
-        <BackTop>
+        <FloatButton.BackTop>
           <div className="ant-back-top-inner flex items-center justify-center bg-[rgb(255,99,71)] hover:bg-[#FE6B6E] text-white w-12 h-12 mr-8 mb-9 rounded-lg shadow-lg border-2 border-[rgba(255,99,71,0.8)] fixed bottom-0 right-0 cursor-pointer transition-colors duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +266,7 @@ const Header = () => {
               <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
             </svg>
           </div>
-        </BackTop>
+        </FloatButton.BackTop>
       )}
     </>
   );
