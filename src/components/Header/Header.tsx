@@ -9,6 +9,7 @@ import RegisterModal from "../Auth/Register/RegisterModal";
 import { logout } from "../../redux/store/slices/userSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BackTop } from "antd";
 
 const Header = () => {
   // thay đổi trạng thái cho dropdown user menu, mobile menu và login modal
@@ -17,6 +18,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [showBackTop, setShowBackTop] = useState(false); // Trạng thái cho BackTop button
 
   // Lấy thông tin người dùng từ Redux Store
   const user = useSelector((state: RootState) => state.user);
@@ -85,6 +87,20 @@ const Header = () => {
     };
   }, []);
 
+  // useEffect để theo dõi sự kiện cuộn trang
+  // và hiển thị/ẩn nút BackTop dựa trên vị trí cuộn
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackTop(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleSignOut = () => {
     dispatch(logout()); // Gọi action logout để xóa thông tin người dùng
     setIsUserMenuOpen(false); // Đặt lại trạng thái menu về false để khi đăng xuất thì menu sẽ đóng
@@ -106,7 +122,7 @@ const Header = () => {
               alt="Airbnb Logo"
             />
             <span className="self-center text-2xl font-semi font-bold whitespace-nowrap text-[#FE6B6E] duration-500 hover:text-rose-600">
-              airbnb
+              Airbnb
             </span>
           </Link>
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -218,6 +234,22 @@ const Header = () => {
         onClose={closeRegisterModal}
         switchToLogin={openLoginModal}
       />
+
+      {/* BackTop Button */}
+      {showBackTop && (
+        <BackTop>
+          <div className="ant-back-top-inner flex items-center justify-center bg-[rgb(255,99,71)] hover:bg-[#FE6B6E] text-white w-12 h-12 mr-8 mb-9 rounded-lg shadow-lg border-2 border-[rgba(255,99,71,0.8)] fixed bottom-0 right-0 cursor-pointer transition-colors duration-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 384 512"
+              fill="currentColor"
+              className="w-6 h-6"
+            >
+              <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+            </svg>
+          </div>
+        </BackTop>
+      )}
     </>
   );
 };
