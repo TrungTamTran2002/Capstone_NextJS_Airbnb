@@ -13,13 +13,11 @@ const NavLinks = ({ isMobileMenuOpen, isScrolled }: NavLinkProps) => {
       } w-full md:flex md:w-auto md:order-1`}
       id="navbar-user"
     >
-      <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
+      <ul className="flex flex-col text-[#FE6B6E] font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
         <li>
           <Link
             to="/"
-            className={`block py-2 px-3 rounded-sm md:bg-transparent md:p-0 ${
-              isScrolled ? "text-black hover:text-[#FE6B6E]" : "text-white"
-            }`}
+            className={"block py-2 px-3 rounded-sm md:bg-transparent md:p-0"}
             aria-current="page"
           >
             Trang chủ
@@ -29,7 +27,9 @@ const NavLinks = ({ isMobileMenuOpen, isScrolled }: NavLinkProps) => {
           <Link
             to="/about"
             className={`block py-2 px-3 font-bold rounded-sm hover:bg-transparent md:hover:bg-transparent md:p-0 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full ${
-              isScrolled ? "text-black hover:text-[#FE6B6E]" : "text-white"
+              isScrolled
+                ? "text-black hover:text-[#FE6B6E]"
+                : "text-white hover:text-[#FE6B6E]"
             }`}
           >
             Giới thiệu
@@ -39,7 +39,9 @@ const NavLinks = ({ isMobileMenuOpen, isScrolled }: NavLinkProps) => {
           <Link
             to="/services"
             className={`block py-2 px-3 font-bold rounded-sm hover:bg-transparent md:hover:bg-transparent md:p-0 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full ${
-              isScrolled ? "text-black hover:text-[#FE6B6E]" : "text-white"
+              isScrolled
+                ? "text-black hover:text-[#FE6B6E]"
+                : "text-white hover:text-[#FE6B6E]"
             }`}
           >
             Dịch vụ
@@ -49,7 +51,9 @@ const NavLinks = ({ isMobileMenuOpen, isScrolled }: NavLinkProps) => {
           <Link
             to="/pricing"
             className={`block py-2 px-3 font-bold rounded-sm hover:bg-transparent md:hover:bg-transparent md:p-0 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full ${
-              isScrolled ? "text-black hover:text-[#FE6B6E]" : "text-white"
+              isScrolled
+                ? "text-black hover:text-[#FE6B6E]"
+                : "text-white hover:text-[#FE6B6E]"
             }`}
           >
             Chi phí
@@ -59,7 +63,9 @@ const NavLinks = ({ isMobileMenuOpen, isScrolled }: NavLinkProps) => {
           <Link
             to="contact"
             className={`block py-2 px-3 font-bold rounded-sm hover:bg-transparent md:hover:bg-transparent md:p-0 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#FE6B6E] after:transition-all after:duration-500 hover:after:w-full ${
-              isScrolled ? "text-black hover:text-[#FE6B6E]" : "text-white"
+              isScrolled
+                ? "text-black hover:text-[#FE6B6E]"
+                : "text-white hover:text-[#FE6B6E]"
             }`}
           >
             Liên hệ
