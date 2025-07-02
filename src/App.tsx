@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/Footer/Footer";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 // Component Layout chứa Header
 interface WithHeaderProps {
@@ -32,19 +33,12 @@ function App() {
             </WithHeader>
           }
         />
+
         <Route
-          path="/about"
+          path="*"
           element={
             <WithHeader>
-              <div>About Page</div>
-            </WithHeader>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <WithHeader>
-              <div>Contact Page</div>
+              <NotFoundPage />
             </WithHeader>
           }
         />
