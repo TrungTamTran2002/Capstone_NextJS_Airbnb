@@ -1,0 +1,47 @@
+.banner-responsive.circular {
+  margin-top: -190px;
+}
+
+@media screen and (min-width: 1536px) {
+  .banner-responsive.circular {
+    margin-top: -190px;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1536px) {
+    .banner-responsive.circular {
+        margin-top: -190px;
+        z-index: 1;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1536px) {
+    .banner-responsive.circular {
+        margin-top: -100px;
+        z-index: 1;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1536px) {
+    .banner-responsive {
+        width: 100%;
+        z-index: -1;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+    .banner-responsive.circular {
+        margin-top: -80px;
+        z-index: 1;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+    .banner-responsive {
+        padding-top: 40px;
+        width: 100%;
+        z-index: -1;
+    }
+}
+
+
